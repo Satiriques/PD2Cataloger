@@ -1,13 +1,21 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
 
 namespace PD2Cataloger
 {
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum Quality
     {
+        [EnumMember(Value = nameof(Normal))]
         Normal,
+        [EnumMember(Value = nameof(Magic))]
         Magic,
+        [EnumMember(Value = nameof(Rare))]
         Rare,
+        [EnumMember(Value = nameof(Set))]
         Set,
+        [EnumMember(Value = nameof(Unique))]
         Unique,
     }
     public class ItemModel
@@ -58,19 +66,19 @@ namespace PD2Cataloger
         public string Skill { get; set; }
 
         [JsonProperty("value")]
-        public int Value { get; set; }
+        public int? Value { get; set; }
 
         [JsonProperty("max")]
-        public int Max { get; set; }
+        public int? Max { get; set; }
 
         [JsonProperty("min")]
-        public int Min { get; set; }
+        public int? Min { get; set; }
 
-        [JsonProperty("chance")]
-        public int Chance { get; set; }
+        [JsonProperty("chance%")]
+        public int? Chance { get; set; }
 
         [JsonProperty("level")]
-        public int Level { get; set; }
+        public int? Level { get; set; }
     }
 
     public class Range

@@ -58,8 +58,12 @@ namespace PD2Cataloger
         private void CopyToClipboardExecute()
         {
             _isCopying = true;
+            var settings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            };
 
-            var itemString = JsonConvert.SerializeObject(SelectedItem.Model, Formatting.Indented);
+            var itemString = JsonConvert.SerializeObject(SelectedItem.Model, Formatting.Indented, settings);
             if (!string.IsNullOrWhiteSpace(itemString))
             {
                 Clipboard.SetText(itemString);
