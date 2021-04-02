@@ -11,6 +11,7 @@ namespace PD2Cataloger.ViewModels
             Model = stat;
             if (stat.Range != null) Range = new RangeViewModel(stat.Range);
 
+            Corrupted = Model.Corrupted;
             FormattedString = statTranslater.GetFormattedString(stat);
         }
 
@@ -22,5 +23,6 @@ namespace PD2Cataloger.ViewModels
         public StatModel Model { get; }
         public RangeViewModel Range { get; }
         public string FormattedString { get; }
+        public bool Corrupted { get; }
     }
 }

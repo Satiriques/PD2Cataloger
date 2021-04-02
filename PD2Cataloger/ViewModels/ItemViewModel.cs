@@ -12,7 +12,9 @@ namespace PD2Cataloger
     {
         HashSet<string> _ignoredStats = new HashSet<string>() 
         {
-            "maxdurability"
+            "maxdurability",
+            "item_throw_maxdamage",
+            "coldlength"
         };
 
         public ItemViewModel(ViewModelFactory viewModelFactory, ItemModel model)
@@ -57,8 +59,6 @@ namespace PD2Cataloger
                 {
                     Stats.Add(viewModelFactory.CreateStat(stat));
                 }
-
-              
             }
         }
 

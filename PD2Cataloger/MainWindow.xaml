@@ -20,6 +20,7 @@
                 </Style.Triggers>
             </Style>
             <converters:QualityToColorConverter x:Key="QualityToColorConverter"/>
+            <converters:BoolToCorruptedColor x:Key="BoolToCorruptedColor"/>
             <Style TargetType="Label">
                 <Setter Property="Padding" Value="0"/>
             </Style>
@@ -102,7 +103,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <DockPanel HorizontalAlignment="Center">
-                                <Label Content="{Binding FormattedString}"/>
+                                <Label Content="{Binding FormattedString}" Foreground="{Binding Corrupted, Converter={StaticResource BoolToCorruptedColor}}"/>
                                 <DockPanel>
                                     <Label Foreground="Green" Margin="8,0">
                                         <TextBlock>

@@ -79,6 +79,9 @@ namespace PD2Cataloger
 
         [JsonProperty("level")]
         public int? Level { get; set; }
+
+        [JsonProperty("corrupted", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public bool Corrupted { get; set; }
     }
 
     public class Range
