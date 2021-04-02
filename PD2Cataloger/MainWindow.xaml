@@ -1,0 +1,122 @@
+﻿<local:ClipboardMonitorWindow x:Class="PD2Cataloger.MainWindow"
+                              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                              xmlns:local="clr-namespace:PD2Cataloger"
+                              mc:Ignorable="d"
+                              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:converters="clr-namespace:PD2Cataloger.Converters"
+                              Title="PD2Cataloger" 
+                              Height="450" 
+                              Width="800"
+                              d:DataContext="{d:DesignInstance local:MainWindow, IsDesignTimeCreatable=True}">
+    <local:ClipboardMonitorWindow.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" x:Key="listenButtonStyle" BasedOn="{StaticResource MahApps.Styles.Button}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsListening}">
+                        <Setter Property="Background" Value="Green"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            <converters:QualityToColorConverter x:Key="QualityToColorConverter"/>
+            <Style TargetType="Label">
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+        </ResourceDictionary>
+    </local:ClipboardMonitorWindow.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Grid.ColumnSpan="2" 
+                   Margin="4"
+                   HorizontalAlignment="Stretch">
+            <ComboBox Width="150" 
+                      IsEditable="True" 
+                      Text="{Binding SelectedAccount, UpdateSourceTrigger=Explicit}"
+                      ItemsSource="{Binding Accounts}"
+                      SelectedItem="{Binding SelectedAccount}">
+                <ComboBox.InputBindings>
+                    <KeyBinding Gesture="Enter"
+                                Command="{Binding ComboBoxEnterCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ComboBox}}}"/>
+                </ComboBox.InputBindings>
+            </ComboBox>
+            <Button Content="Remove"
+                    Margin="4,0"
+                    Command="{Binding RemoveCommand}"
+                    Foreground="Red"/>
+            <ToggleButton Content="LISTEN" 
+                          Margin="4,0" 
+                          HorizontalAlignment="Right"
+                          Command="{Binding ListenCommand}"/>
+        </DockPanel>
+
+        <GridSplitter Grid.Column="1" 
+                      Grid.RowSpan="2"
+                      HorizontalAlignment="Stretch" />
+
+        <ListBox Grid.Row="1" 
+                 Margin="4" 
+                 HorizontalAlignment="Stretch" 
+                 ItemsSource="{Binding ShownItems}"
+                 SelectedItem="{Binding SelectedItem}"
+                 PreviewKeyDown="ListBox_PreviewKeyDown">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Runeword}" Margin="2,0"/>
+                        <TextBlock Text="{Binding Type}" Margin="2,0"/>
+                        <TextBlock Text="{Binding Type}" Margin="2,0"/>
+                    </DockPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Label Grid.Row="1" 
+               Grid.Column="2" 
+               Margin="4" 
+               HorizontalAlignment="Center">
+            <StackPanel>
+                <DockPanel Margin="0" HorizontalAlignment="Center">
+                    <!--NAME-->
+                    <Label Content="{Binding SelectedItem.Name}" Foreground="{Binding SelectedItem.Quality, Converter={StaticResource QualityToColorConverter}}"/>
+                    <!--ETH-->
+                    <Label Content="[Eth]" Margin="8,0" Visibility="{Binding SelectedItem.IsEthereal, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Gray"/>
+                </DockPanel>
+                <Label Margin="0" HorizontalContentAlignment="Center" Content="{Binding SelectedItem.Type}" Foreground="{Binding SelectedItem.Quality, Converter={StaticResource QualityToColorConverter}}"/>
+                <Label Margin="0,5" HorizontalContentAlignment="Center" Content="{Binding SelectedItem.Defense}" ContentStringFormat="Defense: {0}"/>
+                <ItemsControl ItemsSource="{Binding SelectedItem.Stats}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel HorizontalAlignment="Center">
+                                <Label Content="{Binding FormattedString}"/>
+                                <DockPanel>
+                                    <Label Foreground="Green" Margin="8,0">
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}[{0} - {1}]">
+                                                    <Binding Path="Range.Min"/>
+                                                    <Binding Path="Range.Max"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </Label>
+                                </DockPanel>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Label>
+    </Grid>
+</local:ClipboardMonitorWindow>
