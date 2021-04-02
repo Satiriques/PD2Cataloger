@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <None Update="Resources\Translation.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

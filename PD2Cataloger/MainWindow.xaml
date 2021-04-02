@@ -64,6 +64,10 @@
                       Grid.RowSpan="2"
                       HorizontalAlignment="Stretch" />
 
+        <DockPanel Grid.Column="2" HorizontalAlignment="Center">
+            <Button Content="Copy to Clipboard" Command="{Binding CopyToClipboardCommand}" HorizontalAlignment="Center"/>
+        </DockPanel>
+
         <ListBox Grid.Row="1" 
                  Margin="4" 
                  HorizontalAlignment="Stretch" 

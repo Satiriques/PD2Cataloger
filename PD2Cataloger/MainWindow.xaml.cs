@@ -23,6 +23,7 @@ namespace PD2Cataloger
         private string _selectedAccount;
         private Config _config;
         private ItemViewModel _selectedItem;
+        private bool _isCopying;
         private readonly ViewModelFactory _viewModelFactory;
         public MainWindow()
         {
@@ -38,6 +39,7 @@ namespace PD2Cataloger
             ComboBoxEnterCommand = new DelegateCommand<ComboBox>(ComboBoxEnterExecute);
             RemoveCommand = new DelegateCommand(RemoveExecute, RemoveCanExecute);
             ClipboardUpdateCommand = new DelegateCommand(ClipboardUpdateExecute);
+            CopyToClipboardCommand = new DelegateCommand(CopyToClipboardExecute, CopyToClipboardCanExecute);
 
             SelectedAccount = _config.Accounts.FirstOrDefault();
 
@@ -51,9 +53,24 @@ namespace PD2Cataloger
             InitializeComponent();
         }
 
+        private bool CopyToClipboardCanExecute() => SelectedItem != null;
+
+        private void CopyToClipboardExecute()
+        {
+            _isCopying = true;
+
+            var itemString = JsonConvert.SerializeObject(SelectedItem.Model, Formatting.Indented);
+            if (!string.IsNullOrWhiteSpace(itemString))
+            {
+                Clipboard.SetText(itemString);
+            }
+
+            _isCopying = false;
+        }
+
         private void ClipboardUpdateExecute()
         {
-            if (IsListening)
+            if (IsListening && !_isCopying)
             {
                 var text = Clipboard.GetText();
 
@@ -87,6 +104,8 @@ namespace PD2Cataloger
                 }
             }
         }
+
+        public DelegateCommand CopyToClipboardCommand { get; }
 
         public string SelectedAccount
         {
@@ -122,6 +141,7 @@ namespace PD2Cataloger
                 {
                     _selectedItem = value;
                     RaisePropertyChanged();
+                    CopyToClipboardCommand.RaiseCanExecuteChanged();
                 }
             }
         }
