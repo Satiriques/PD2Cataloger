@@ -70,7 +70,7 @@
   "item_healafterkill": "+%value% Life after each Kill",
   "item_reducedprices": "Reduces all Vendor Prices %%value%",
   "item_lightradius": "+%value% to Light Radius",
-  "item_req_percent": "Requirements -%value%%",
+  "item_req_percent": "Requirements %value%%",
   "item_levelreq": "",
   "item_fasterattackrate": "+%value%% Increased Attack Speed",
   "item_levelreqpct": "",
@@ -92,5 +92,13 @@
   "item_staminadrainpct": "%value%% Slower Stamina Drain",
   "damageresist": "Physical Damage Taken Reduced By %value%%",
   "dmg%": "+%value%% Enhanced Damage",
-  "passive_fire_pierce": "-%value%% To Enemy Fire Resistance"
+  "passive_fire_pierce": "-%value%% To Enemy Fire Resistance",
+  "item_skillonhit": "%chance%% Chance to cast level %level% Holy Bolt on striking",
+  "item_demondamage_percent": "+%value%% Damage to Demons",
+  "item_splashonhit": "Melee Attacks Deal Splash Damage",
+  "item_addskill_tab": "+%value% to %skill%",
+  "item_deadlystrike": "%value%% Deadly Strike",
+  "item_crushingblow": "%value%% Chance of Crushing Blow",
+  "item_openwounds": "%value%% Chance of Open Wounds",
+  "maxstamina": "+%value% Maximum Stamina"
 }

@@ -77,10 +77,9 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel>
-                        <TextBlock Text="{Binding Name}"/>
-                        <TextBlock Text="{Binding Runeword}" Margin="2,0"/>
-                        <TextBlock Text="{Binding Type}" Margin="2,0"/>
-                        <TextBlock Text="{Binding Type}" Margin="2,0"/>
+                        <TextBlock Text="{Binding Name}" Foreground="{Binding Quality, Converter={StaticResource QualityToColorConverter}}" Visibility="{Binding Name, Converter={StaticResource StringToVisibilityConverter}}" Margin="0,0,2,0"/>
+                        <TextBlock Text="{Binding Runeword}" Visibility="{Binding Runeword, Converter={StaticResource StringToVisibilityConverter}}" Margin="0,0,2,0"/>
+                        <Label Content="{Binding Type}" ContentStringFormat="{}({0})" Foreground="{Binding Quality, Converter={StaticResource QualityToColorConverter}}"/>
                     </DockPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

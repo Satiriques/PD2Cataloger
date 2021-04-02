@@ -10,6 +10,11 @@ namespace PD2Cataloger
 {
     public class ItemViewModel : BindableBase
     {
+        HashSet<string> _ignoredStats = new HashSet<string>() 
+        {
+            "maxdurability"
+        };
+
         public ItemViewModel(ViewModelFactory viewModelFactory, ItemModel model)
         {
             Model = model;
@@ -27,6 +32,12 @@ namespace PD2Cataloger
             for (var i = 0; i < model.Stats.Length; i++)
             {
                 StatModel stat = model.Stats[i];
+
+                if(_ignoredStats.Contains(stat.Name))
+                {
+                    continue;
+                }
+
                 var viewModel = viewModelFactory.CreateStat(stat);
 
                 var index = viewModel.FormattedString.IndexOf('_');

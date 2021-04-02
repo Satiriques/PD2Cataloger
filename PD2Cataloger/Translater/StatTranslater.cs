@@ -23,7 +23,11 @@ namespace PD2Cataloger.Translater
 
         public string GetFormattedString(StatModel model)
         {
-            var stringValue = _translationDictionary.GetValueOrDefault(model.Name)?.Replace("%value%", model.Value.ToString()) ?? model.Name;
+            var stringValue = _translationDictionary.GetValueOrDefault(model.Name)?
+                                   .Replace("%value%", model.Value?.ToString())
+                                   .Replace("%chance%", model.Chance?.ToString())
+                                   .Replace("%level%", model.Level?.ToString())
+                                   .Replace("%skill%", model.Skill) ?? model.Name;
 
             return stringValue;
         }
