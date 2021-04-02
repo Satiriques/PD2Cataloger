@@ -24,7 +24,9 @@ namespace PD2Cataloger
         private Config _config;
         private ItemViewModel _selectedItem;
         private bool _isCopying;
+        private bool _failedToCopy;
         private readonly ViewModelFactory _viewModelFactory;
+
         public MainWindow()
         {
             _config = Config.Create();
@@ -54,9 +56,21 @@ namespace PD2Cataloger
         }
 
         private bool CopyToClipboardCanExecute() => SelectedItem != null;
+        public bool FailedToCopy
+        {
+            get => _failedToCopy; set
+            {
+                if(_failedToCopy != value)
+                {
+                    _failedToCopy = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
 
         private void CopyToClipboardExecute()
         {
+            FailedToCopy = false;
             _isCopying = true;
             var settings = new JsonSerializerSettings
             {
@@ -66,7 +80,15 @@ namespace PD2Cataloger
             var itemString = JsonConvert.SerializeObject(SelectedItem.Model, Formatting.Indented, settings);
             if (!string.IsNullOrWhiteSpace(itemString))
             {
-                Clipboard.SetText(itemString);
+                try
+                {
+                    Clipboard.SetText(itemString);
+                }
+                catch
+                {
+                    FailedToCopy = true;
+                }
+
             }
 
             _isCopying = false;
@@ -141,7 +163,7 @@ namespace PD2Cataloger
             get => _selectedItem;
             set
             {
-                if(_selectedItem != value)
+                if (_selectedItem != value)
                 {
                     _selectedItem = value;
                     RaisePropertyChanged();
@@ -197,7 +219,7 @@ namespace PD2Cataloger
 
         private void ListBox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if(e.Key == System.Windows.Input.Key.Delete)
+            if (e.Key == System.Windows.Input.Key.Delete)
             {
                 _config.RemoveItem(SelectedAccount, SelectedItem.Model);
                 ShownItems.Remove(SelectedItem);

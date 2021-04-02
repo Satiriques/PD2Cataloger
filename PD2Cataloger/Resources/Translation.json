@@ -104,5 +104,6 @@
   "item_singleskill": "+%value% to %skill%",
   "item_skillongethit": "%chance%% Chance to cast level %level% %skill% when struck",
   "item_indesctructible": "Indestructible",
-  "item_undeaddamage_percent": "+%value%% Damage to Undead"
+  "item_undeaddamage_percent": "+%value%% Damage to Undead",
+  "maxhp": "+%value% to Life"
 }
