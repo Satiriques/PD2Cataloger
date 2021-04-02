@@ -216,7 +216,6 @@ namespace PD2Cataloger
             _config.RemoveAccount(SelectedAccount);
             Accounts.Remove(SelectedAccount);
             SelectedAccount = Accounts.FirstOrDefault();
-            
         }
 
         private void ListBox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)

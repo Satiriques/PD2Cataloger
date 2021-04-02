@@ -30,6 +30,7 @@ namespace PD2Cataloger
             IsRuneword = model.IsRuneword;
             Defense = model.Defense;
             IsEthereal = model.IsEthereal;
+            NumberOfSockets = model.NumberOfSockets;
 
             for (var i = 0; i < model.Stats.Length; i++)
             {
@@ -72,6 +73,7 @@ namespace PD2Cataloger
         public bool IsRuneword { get; }
         public int Defense { get; }
         public bool IsEthereal { get; }
+        public int NumberOfSockets { get; }
         public string FormattedString { get; }
         public ItemModel Model { get; }
     }

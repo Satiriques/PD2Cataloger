@@ -21,6 +21,7 @@
             </Style>
             <converters:QualityToColorConverter x:Key="QualityToColorConverter"/>
             <converters:BoolToCorruptedColor x:Key="BoolToCorruptedColor"/>
+            <converters:GreaterThanZeroVisibilityConverter x:Key="GreaterThanZeroVisibilityConverter"/>
             <Style TargetType="Label">
                 <Setter Property="Padding" Value="0"/>
             </Style>
@@ -86,7 +87,8 @@
                     <DockPanel>
                         <TextBlock Text="{Binding Name}" Foreground="{Binding Quality, Converter={StaticResource QualityToColorConverter}}" Visibility="{Binding Name, Converter={StaticResource StringToVisibilityConverter}}" Margin="0,0,2,0"/>
                         <TextBlock Text="{Binding Runeword}" Visibility="{Binding Runeword, Converter={StaticResource StringToVisibilityConverter}}" Margin="0,0,2,0"/>
-                        <Label Content="{Binding Type}" ContentStringFormat="{}({0})" Foreground="{Binding Quality, Converter={StaticResource QualityToColorConverter}}"/>
+                        <Label Content="{Binding Type}" ContentStringFormat="{}({0})" Foreground="{Binding Quality, Converter={StaticResource QualityToColorConverter}}" Margin="0,0,2,0"/>
+                        <Label Content="{Binding NumberOfSockets}" ContentStringFormat="{}[{0}]" Foreground="Gray" Visibility="{Binding NumberOfSockets, Converter={StaticResource GreaterThanZeroVisibilityConverter}}"/>
                     </DockPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -99,9 +101,10 @@
             <StackPanel>
                 <DockPanel Margin="0" HorizontalAlignment="Center">
                     <!--NAME-->
-                    <Label Content="{Binding SelectedItem.Name}" Foreground="{Binding SelectedItem.Quality, Converter={StaticResource QualityToColorConverter}}"/>
+                    <Label DockPanel.Dock="Left" Content="{Binding SelectedItem.Name}" Foreground="{Binding SelectedItem.Quality, Converter={StaticResource QualityToColorConverter}}"/>
+                    <Label DockPanel.Dock="Left" Content="{Binding SelectedItem.NumberOfSockets}" ContentStringFormat="{}[{0}]" Foreground="Gray" Visibility="{Binding SelectedItem.NumberOfSockets, Converter={StaticResource GreaterThanZeroVisibilityConverter}}"/>
                     <!--ETH-->
-                    <Label Content="[Eth]" Margin="8,0" Visibility="{Binding SelectedItem.IsEthereal, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Gray"/>
+                    <Label DockPanel.Dock="Left" Content="[Eth]" Margin="0,0,0,0" Visibility="{Binding SelectedItem.IsEthereal, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Gray"/>
                 </DockPanel>
                 <Label Margin="0" HorizontalContentAlignment="Center" Content="{Binding SelectedItem.Type}" Foreground="{Binding SelectedItem.Quality, Converter={StaticResource QualityToColorConverter}}"/>
                 <Label Margin="0,5" HorizontalContentAlignment="Center" Content="{Binding SelectedItem.Defense}" ContentStringFormat="Defense: {0}"/>

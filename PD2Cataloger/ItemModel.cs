@@ -36,7 +36,10 @@ namespace PD2Cataloger
         public StatModel[] Stats { get; set; } = new StatModel[] { };
 
         [JsonProperty("socketed")]
-        public Socket[] Sockets { get; set; }
+        public Socket[] Socketed { get; set; }
+
+        [JsonProperty("sockets")]
+        public int NumberOfSockets { get; set; }
 
         [JsonProperty("type")]
         public string Type { get; set; }
