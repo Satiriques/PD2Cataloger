@@ -107,7 +107,7 @@
                     <Label DockPanel.Dock="Left" Content="[Eth]" Margin="0,0,0,0" Visibility="{Binding SelectedItem.IsEthereal, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Gray"/>
                 </DockPanel>
                 <Label Margin="0" HorizontalContentAlignment="Center" Content="{Binding SelectedItem.Type}" Foreground="{Binding SelectedItem.Quality, Converter={StaticResource QualityToColorConverter}}"/>
-                <Label Margin="0,5" HorizontalContentAlignment="Center" Content="{Binding SelectedItem.Defense}" ContentStringFormat="Defense: {0}"/>
+                <Label Margin="0,5" HorizontalContentAlignment="Center" Content="{Binding SelectedItem.Defense}" ContentStringFormat="Defense: {0}" Visibility="{Binding SelectedItem.Defense, Converter={StaticResource GreaterThanZeroVisibilityConverter}}"/>
                 <ItemsControl ItemsSource="{Binding SelectedItem.Stats}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
