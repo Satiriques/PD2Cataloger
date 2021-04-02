@@ -105,5 +105,6 @@
   "item_skillongethit": "%chance%% Chance to cast level %level% %skill% when struck",
   "item_indesctructible": "Indestructible",
   "item_undeaddamage_percent": "+%value%% Damage to Undead",
-  "maxhp": "+%value% to Life"
+  "maxhp": "+%value% to Life",
+  "maxmana": "+%value% to Mana"
 }
